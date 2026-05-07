@@ -4,10 +4,6 @@ on:
   push:
     branches: [ main ]
 
-# This is the "Magic Fix" for the Node 20/24 transition error
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 permissions:
   contents: read
   pages: write
@@ -17,12 +13,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Updated to v4 (stable)
       - uses: actions/checkout@v4
       
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 24 # Upgraded to 24 to match the runner
+          node-version: '24' # Using the newest stable LTS
 
       - name: Install and Build
         working-directory: ./Aliyah_du_Toit_Portfolio
