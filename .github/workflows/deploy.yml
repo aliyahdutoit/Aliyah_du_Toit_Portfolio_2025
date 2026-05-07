@@ -13,24 +13,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # Updated to v4 (stable)
       - uses: actions/checkout@v4
       
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '24' # Using the newest stable LTS
+          node-version: 24
+
+      - name: Debug Folder Structure
+        run: ls -R
 
       - name: Install and Build
-        working-directory: ./Aliyah_du_Toit_Portfolio
         run: |
+          cd Aliyah_du_Toit_Portfolio
           npm install
           npm run build
 
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./Aliyah_du_Toit_Portfolio/dist
+          path: Aliyah_du_Toit_Portfolio/dist
 
   deploy:
     needs: build
