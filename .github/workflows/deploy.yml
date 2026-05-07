@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ] 
+    branches: [ main ]
 
 permissions:
   contents: read
@@ -14,13 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
-          cache-dependency-path: Aliyah_du_Toit_Portfolio/package-lock.json
 
       - name: Install and Build
+        # This tells GitHub to 'cd' into your subfolder before running commands
         working-directory: ./Aliyah_du_Toit_Portfolio
         run: |
           npm install
@@ -29,7 +30,8 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: Aliyah_du_Toit_Portfolio/dist
+          # This points to the resulting build folder
+          path: ./Aliyah_du_Toit_Portfolio/dist
 
   deploy:
     needs: build
