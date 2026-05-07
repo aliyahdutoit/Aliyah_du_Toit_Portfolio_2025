@@ -22,18 +22,13 @@ jobs:
 
       - name: Install and Build
         run: |
-          # This finds the folder containing your package.json and moves into it
-          PROJECT_DIR=$(find . -name "package.json" -not -path "*/node_modules/*" -exec dirname {} \;)
-          echo "Found project in: $PROJECT_DIR"
-          cd "$PROJECT_DIR"
           npm install
           npm run build
 
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # This finds the dist folder wherever it was created
-          path: ./**/dist
+          path: ./dist # Root dist folder
 
   deploy:
     needs: build
