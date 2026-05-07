@@ -20,19 +20,20 @@ jobs:
         with:
           node-version: 24
 
-      - name: Debug Folder Structure
-        run: ls -R
-
       - name: Install and Build
         run: |
-          cd Aliyah_du_Toit_Portfolio
+          # This finds the folder containing your package.json and moves into it
+          PROJECT_DIR=$(find . -name "package.json" -not -path "*/node_modules/*" -exec dirname {} \;)
+          echo "Found project in: $PROJECT_DIR"
+          cd "$PROJECT_DIR"
           npm install
           npm run build
 
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: Aliyah_du_Toit_Portfolio/dist
+          # This finds the dist folder wherever it was created
+          path: ./**/dist
 
   deploy:
     needs: build
