@@ -4,6 +4,10 @@ on:
   push:
     branches: [ main ]
 
+# This is the "Magic Fix" for the Node 20/24 transition error
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 permissions:
   contents: read
   pages: write
@@ -18,10 +22,9 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24 # Upgraded to 24 to match the runner
 
       - name: Install and Build
-        # This tells GitHub to 'cd' into your subfolder before running commands
         working-directory: ./Aliyah_du_Toit_Portfolio
         run: |
           npm install
@@ -30,7 +33,6 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # This points to the resulting build folder
           path: ./Aliyah_du_Toit_Portfolio/dist
 
   deploy:
