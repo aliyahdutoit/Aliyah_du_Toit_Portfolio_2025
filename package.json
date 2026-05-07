@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "vue-router": "^4.6.4"
+  },
+
+  "scripts": {
+  "build": "vite build" 
+}
+}
+
+
+
