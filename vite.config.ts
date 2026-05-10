@@ -6,6 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/Aliyah_du_Toit_Portfolio_2025/',
   plugins: [
     vue(),
     vueDevTools(),
